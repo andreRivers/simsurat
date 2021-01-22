@@ -82,7 +82,7 @@ foreach ($data->result_array() as $i) :
 
 <!-- KIRIM SURAT -->
 <?php
-$users = "SELECT * From app_user where role_id=5";
+$users = "SELECT * From app_user";
 $us = $this->db->query($users)->result_array();
 foreach ($data->result_array() as $i) :
     $id = $i['id'];

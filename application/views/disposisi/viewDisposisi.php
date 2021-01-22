@@ -34,7 +34,8 @@
                             $hal = $i['hal'];
                             $jenis_archive = $i['jenis_archive'];
                             $catatan = $i['catatan'];
-                            $penerima = $i['penerima'];
+							$penerima = $i['penerima'];
+							$pimpinan = $i['pimpinan'];
                             $disposisi = $i['disposisi'];
                             $ket = $i['ket'];
                             $date_created = $i['date_created'];
@@ -52,8 +53,11 @@
                                             <br>
                                             Penerima : <?php echo $penerima; ?> | Tanggal Kirim : <?php echo Disposisi::format($date_created); ?>
                                             <br>
-                                            Pengirim : <?php echo $email; ?> | Catatan Pengirim : <?php echo $catatan; ?></i>
+                                            Pengirim : <?php echo $email; ?> </i>
+											<br>
+                                            Penanggung Jawab : <?php echo $pimpinan; ?> </i>
                                         <br>
+										
                                         <b> Disposisi: <?php echo $disposisi; ?> <br>
                                             Catatan Disposisi : <?php echo $ket; ?> </b>
                                     </small>

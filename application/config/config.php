@@ -24,7 +24,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://qrbarcode.kuykuyweb.com/';
-$config['base_url'] = 'http://localhost/administrasi/';
+$config['base_url'] = 'http://localhost/simsurat/';
 /*
 |--------------------------------------------------------------------------
 | Index File

@@ -239,7 +239,7 @@
 				<i class="fas fa-fw fa-share-square"></i>
 				<span>Disposisi</span></a>
 		</li>
-
+		<?php if ($user['email'] == 'akrim@umsu.ac.id') { ?>
 		<!-- Divider -->
 		<hr class="sidebar-divider">
 
@@ -258,6 +258,7 @@
 				<i class="fas fa-fw fa-file"></i>
 				<span>List Surat Tugas</span></a>
 		</li>
+		<?php } ?>
 	<?php } ?>
 
 

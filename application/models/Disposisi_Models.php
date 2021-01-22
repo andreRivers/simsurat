@@ -62,7 +62,7 @@ class Disposisi_Models extends CI_Model
     function viewDisposisiUser()
     {
         $email = $this->session->userdata('email');
-        $hasil = $this->db->query("SELECT * FROM app_disposisi where email='$email' AND sts=3");
+        $hasil = $this->db->query("SELECT * FROM app_disposisi where penerima='$email' AND sts=3");
         return $hasil;
     }
 }

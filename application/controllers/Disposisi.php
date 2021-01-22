@@ -165,7 +165,7 @@ class Disposisi extends CI_Controller
         $this->db->where('id', $id);
         $this->db->update('app_disposisi');
         $this->session->set_flashdata('flash_a', 'Success');
-        redirect('disposisi/viewMasuk');
+        redirect('disposisi/viewMasukPimpinan');
     }
 
     public function prosesSurat()
@@ -186,7 +186,6 @@ class Disposisi extends CI_Controller
     {
         $id_surat = $this->input->post('id_surat');
         $now = date("Y-m-d");
-        $penerima = "baum@umsu.ac.id";
         $notifikasi = 1;
         $id = $this->input->post('id');
         $ket = $this->input->post('keterangan');
@@ -196,7 +195,8 @@ class Disposisi extends CI_Controller
         $sts = 3;
 
         $this->db->set('ket', $ket);
-        $this->db->set('disposisi', $disposisi);
+		$this->db->set('disposisi', $disposisi);
+		$this->db->set('penerima', $kepada);
         $this->db->set('sts', $sts);
         $this->db->where('id', $id);
 		$this->db->update('app_disposisi');
