@@ -193,6 +193,32 @@
   });
 </script>
 
+<script type="text/javascript">
+function deleteConfirm(){
+    var result = confirm("Apakah anda yakin ");
+    if(result){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+$(document).ready(function(){
+    $('#select_all').on('click',function(){
+        if(this.checked){
+            $('.checkbox').each(function(){
+                this.checked = true;
+            });
+        }else{
+             $('.checkbox').each(function(){
+                this.checked = false;
+            });
+        }
+    });
+});
+</script>
+
+
 </body>
 
 </html>

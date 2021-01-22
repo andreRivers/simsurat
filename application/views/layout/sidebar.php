@@ -245,7 +245,7 @@
 
 		<!-- Heading -->
 		<div class="sidebar-heading">
-			SPPD
+			Permohonan Lain
 		</div>
 		<li class="nav-item">
 			<a class="nav-link" href="<?= base_url('sppd/list'); ?>">
@@ -258,6 +258,26 @@
 				<i class="fas fa-fw fa-file"></i>
 				<span>List Surat Tugas</span></a>
 		</li>
+
+		<li class="nav-item">
+			<a class="nav-link" href="<?= base_url('atk/index'); ?>">
+				<i class="fas fa-fw fa-file"></i>
+				<span>List ATK</span></a>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link" href="<?= base_url('fasilitas/index'); ?>">
+				<i class="fas fa-fw fa-file"></i>
+				<span>List Fasilitas</span></a>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link" href="<?= base_url('izincuti/index'); ?>">
+				<i class="fas fa-fw fa-file"></i>
+				<span>List Izin Cuti</span></a>
+		</li>
+
+
 		<?php } ?>
 	<?php } ?>
 
