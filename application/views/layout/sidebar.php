@@ -1,3 +1,22 @@
+<?php
+$email = $this->session->userdata('email');
+if ($user['email'] == 'akrim@umsu.ac.id') {
+	$sppd = $this->db->query("SELECT * FROM app_sppd where status='1'");
+	$st = $this->db->query("SELECT * FROM app_surattugas where status='1'");
+
+	$this->dbATK = $this->load->database('db2', TRUE);
+	$atk = $this->dbATK->query("SELECT * FROM sementara where status='1'");
+
+	$this->dbFAS = $this->load->database('db3', TRUE);
+	$fas = $this->dbFAS->query("SELECT * FROM abs_permohonan where status='1'");
+
+
+	$this->dbCUT = $this->load->database('db4', TRUE);
+	$cut = $this->dbCUT->query("SELECT * FROM permohonan where sts='2'");
+
+}
+?>
+
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -233,7 +252,7 @@
 				<i class="fas fa-fw fa-envelope"></i>
 				<span>Surat Masuk</span></a>
 		</li>
-
+ 
 		<li class="nav-item">
 			<a class="nav-link" href="<?= base_url('disposisi/viewDisposisi'); ?>">
 				<i class="fas fa-fw fa-share-square"></i>
@@ -250,31 +269,37 @@
 		<li class="nav-item">
 			<a class="nav-link" href="<?= base_url('sppd/list'); ?>">
 				<i class="fas fa-fw fa-file"></i>
-				<span>List Sppd</span></a>
+				<span>List Sppd</span>
+				<span class="badge badge-danger badge-counter"> <?php echo $sppd->num_rows(); ?> </span>
+				</a>
 		</li>
 
 		<li class="nav-item">
 			<a class="nav-link" href="<?= base_url('suratTugas/viewPimpinan'); ?>">
 				<i class="fas fa-fw fa-file"></i>
-				<span>List Surat Tugas</span></a>
+				<span>List Surat Tugas</span>
+				<span class="badge badge-dark badge-counter"><?php echo $st->num_rows(); ?></span></a>
 		</li>
 
 		<li class="nav-item">
 			<a class="nav-link" href="<?= base_url('atk/index'); ?>">
 				<i class="fas fa-fw fa-file"></i>
-				<span>List ATK</span></a>
+				<span>List ATK</span>
+				<span class="badge badge-primary badge-counter"><?php echo $atk->num_rows(); ?></span></a>
 		</li>
 
 		<li class="nav-item">
 			<a class="nav-link" href="<?= base_url('fasilitas/index'); ?>">
 				<i class="fas fa-fw fa-file"></i>
-				<span>List Fasilitas</span></a>
+				<span>List Fasilitas</span>
+				<span class="badge badge-info badge-counter"><?php echo $fas->num_rows(); ?></span></a>
 		</li>
 
 		<li class="nav-item">
 			<a class="nav-link" href="<?= base_url('izincuti/index'); ?>">
 				<i class="fas fa-fw fa-file"></i>
-				<span>List Izin Cuti</span></a>
+				<span>List Izin Cuti</span>
+				<span class="badge badge-light badge-counter"><?php echo $cut->num_rows(); ?></span></a>
 		</li>
 
 
