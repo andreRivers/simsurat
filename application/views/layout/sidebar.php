@@ -258,6 +258,14 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 				<i class="fas fa-fw fa-share-square"></i>
 				<span>Disposisi</span></a>
 		</li>
+
+
+		
+		<li class="nav-item">
+			<a class="nav-link" href="<?= base_url('disposisi/viewRiwayat'); ?>">
+				<i class="fas fa-fw fa-history"></i>
+				<span>Riwayat Surat Masuk</span></a>
+		</li>
 		<?php if ($user['email'] == 'akrim@umsu.ac.id') { ?>
 		<!-- Divider -->
 		<hr class="sidebar-divider">

@@ -64,5 +64,12 @@ class Disposisi_Models extends CI_Model
         $email = $this->session->userdata('email');
         $hasil = $this->db->query("SELECT * FROM app_disposisi where penerima='$email' AND sts=3");
         return $hasil;
+	}
+	
+	function viewRiwayat()
+    {
+        $email = $this->session->userdata('email');
+        $hasil = $this->db->query("SELECT * FROM app_disposisi where pimpinan='$email' AND sts BETWEEN '3' AND '4'");
+        return $hasil;
     }
 }

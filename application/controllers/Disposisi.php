@@ -151,7 +151,22 @@ class Disposisi extends CI_Controller
         $this->load->view('disposisi/viewMasuk', $data);
         $this->load->view('disposisi/modal', $data);
         $this->load->view('layout/footer');
+	}
+	
+	public function viewRiwayat()
+    {
+        $data['title'] = 'Riwayat Surat Masuk ';
+        $data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['data'] = $this->Disposisi_Models->viewRiwayat();
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('layout/sidebar', $data);
+        $this->load->view('layout/navbar', $data);
+        $this->load->view('disposisi/riwayat', $data);
+        $this->load->view('disposisi/modal', $data);
+        $this->load->view('layout/footer');
     }
+
 
 
     public function tolakSurat()
