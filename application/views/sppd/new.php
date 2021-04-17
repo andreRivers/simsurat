@@ -36,7 +36,7 @@
         </div>
         <hr>
         <div class="form-group row">
-        <label for="inputEmail" class="col-sm-4 col-form-label">1. Nama Pegawai :</label>
+        <label for="inputEmail" class="col-sm-4 col-form-label">1. Nama Pejabat :</label>
         <div class="col-sm-8">
         <input type="text" class="form-control" id="nama_pegawai" name="nama_pegawai" required>
         </div>
@@ -64,7 +64,7 @@
         </div>
         <hr>
         <div class="form-group row">
-        <label for="inputEmail" class="col-sm-4 col-form-label">2. Nama Pegawai :</label>
+        <label for="inputEmail" class="col-sm-4 col-form-label">2. Nama Pejabat:</label>
         <div class="col-sm-8">
         <input type="text" class="form-control" id="nama_pegawai2" name="nama_pegawai2">
         </div>

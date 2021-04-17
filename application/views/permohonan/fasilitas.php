@@ -39,7 +39,7 @@
 								Fasilitas : <?= $fas['fasilitas']; ?>
 								 </b> 
 								<br> <small> Tingkat Kegiatan : <?= $fas['tingkat_kegiatan']; ?> | Mulai Acara : <?= $fas['start_event']; ?> | Selesai Acara <?= $fas['end_event']; ?> 
-								<br> Penanggung Jawab : <?= $fas['penanggung_jawab']; ?> | Ketua Pelaksana : <?= $fas['ketua_pelaksana']; ?></small>
+								<br> Penanggung Jawab : <?= $fas['penanggung_jawab']; ?> </small>
 								<br> Tanggal Permohonan : <?= $fas['tgl_permohonan']; ?>
 								</td>
 								<td>

@@ -3,6 +3,7 @@ $jenis_archive = "SELECT * From app_jenis_archive";
 $ja = $this->db->query($jenis_archive)->result_array();
 foreach ($data->result_array() as $i) :
 	$id = $i['id'];
+	$no_surat = $i['no_surat'];
 	$kode_surat = $i['kode_surat'];
 	$hal = $i['hal'];
 	$jenis_archive = $i['jenis_archive'];
@@ -20,12 +21,20 @@ foreach ($data->result_array() as $i) :
 					</button>
 				</div>
 				<div class="modal-body">
-					<form method="POST" action="<?= base_url('archive/edit2'); ?>">
+					<form method="POST" action="<?= base_url('archiveNew/edit2'); ?>">
+					<div class="form-group">
+					<label for="text">ID</label>
 							<input type="text" class="form-control" id="id" name="id" value="<?php echo $id; ?>" readonly>
+					</div>
+					<div class="form-group">
+					<label for="text">Nomor Surat</label>
+							<input type="text" class="form-control" id="id" name="id" value="<?php echo $no_surat; ?>" readonly>
+					</div>
+
 						<div class="form-group">
 							<label for="text">Kode Surat</label>
 							<input type="text" class="form-control" placeholder="Kode Surat" id="kode_surat" name="kode_surat" value="<?php echo $kode_surat; ?>" required>
-							<small class="text-danger pl-2">- Contoh Pengisian : /KEP/II.3-AU/UMSU/D/2020 </small>
+							<small class="text-danger pl-2">- Contoh Pengisian : /KEP/II.3-AU/UMSU/D/2021 </small>
 						</div>
 						<div class="form-group">
 							<label for="text">Hal</label>
@@ -64,6 +73,8 @@ $jenis_archive = "SELECT * From app_jenis_archive";
 $ja = $this->db->query($jenis_archive)->result_array();
 foreach ($data->result_array() as $i) :
 	$id = $i['id'];
+	$no_surat = $i['no_surat'];
+	$kode_surat = $i['kode_surat'];
 	$scan = $i['scan'];
 ?>
 	<!-- Edit Archive Modal-->
@@ -77,12 +88,19 @@ foreach ($data->result_array() as $i) :
 					</button>
 				</div>
 				<div class="modal-body">
-					<form method="POST" action="<?= base_url('archive/upload2'); ?>" enctype="multipart/form-data">
+					<form method="POST" action="<?= base_url('archiveNew/upload2'); ?>" enctype="multipart/form-data">
 						<div class="form-group">
-							<label for="text">Nomor Surat</label>
+							<label for="text">ID</label>
 							<input type="text" class="form-control" id="id" name="id" value="<?php echo $id; ?>" readonly>
 
 						</div>
+						
+						<div class="form-group">
+							<label for="text">Kode Surat</label>
+							<input type="text" class="form-control" placeholder="Kode Surat" id="kode_surat" name="kode_surat" value="<?php echo $no_surat; ?><?php echo $kode_surat; ?>" readonly>
+							
+						</div>
+
 						<div class="form-group">
 							<label for="text">Upload File</label>
 							<input type="file" class="form-control" placeholder="Upload" id="scan" name="scan" value="<?php echo $scan; ?>" required>

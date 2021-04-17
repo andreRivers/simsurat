@@ -11,7 +11,8 @@ class ArchiveNew_Models extends CI_Model
 
 	function view_archive_upload($id)
 	{
-		$hasil = $this->db->query("SELECT * FROM app_archive_new where id='$id' ");
+		$email = $this->session->userdata('email');
+		$hasil = $this->db->query("SELECT * FROM app_archive_new where no_surat='$id' AND email='$email' ");
 		return $hasil;
 	}
 
@@ -22,10 +23,10 @@ class ArchiveNew_Models extends CI_Model
 		$tes = $email['role_id'];
 		$tesi = $email['email'];
 		if ($tes == '2') {
-			$hasil = $this->db->query("SELECT * FROM app_archive_new order by id DESC  LIMIT 30");
+			$hasil = $this->db->query("SELECT * FROM app_archive_new order by id DESC LIMIT 30");
 			return $hasil;
 		} else {
-			$hasil = $this->db->query("SELECT * FROM app_archive_new where email = '$tesi' order by id DESC ");
+			$hasil = $this->db->query("SELECT * FROM app_archive_new where email = '$tesi' order by id DESC LIMIT 30");
 			return $hasil;
 		}
 	}
@@ -64,6 +65,13 @@ class ArchiveNew_Models extends CI_Model
 	{
 
 		$hasil = $this->db->query("SELECT * FROM app_archive_new where email='$email'");
+		return $hasil;
+	}
+
+	function view_archive_keyword($keyword)
+	{
+		$email = $this->session->userdata('email');
+		$hasil = $this->db->query("SELECT * FROM app_archive_new where email='$email' AND (no_surat LIKE '%$keyword%' OR hal LIKE '%$keyword%' OR tujuan LIKE '%$keyword%')");
 		return $hasil;
 	}
 }

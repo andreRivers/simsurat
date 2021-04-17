@@ -151,8 +151,8 @@ class Disposisi extends CI_Controller
         $this->load->view('disposisi/viewMasuk', $data);
         $this->load->view('disposisi/modal', $data);
         $this->load->view('layout/footer');
-	}
-	
+    }
+
 	public function viewRiwayat()
     {
         $data['title'] = 'Riwayat Surat Masuk ';
@@ -168,7 +168,6 @@ class Disposisi extends CI_Controller
     }
 
 
-
     public function tolakSurat()
     {
         $id = $this->input->post('id');
@@ -180,7 +179,7 @@ class Disposisi extends CI_Controller
         $this->db->where('id', $id);
         $this->db->update('app_disposisi');
         $this->session->set_flashdata('flash_a', 'Success');
-        redirect('disposisi/viewMasukPimpinan');
+        redirect('disposisi/viewMasuk');
     }
 
     public function prosesSurat()
@@ -197,7 +196,7 @@ class Disposisi extends CI_Controller
         redirect('disposisi/viewMasuk');
     }
 
-    public function disposisiSurat()
+      public function disposisiSurat()
     {
         $id_surat = $this->input->post('id_surat');
         $now = date("Y-m-d");
@@ -211,7 +210,7 @@ class Disposisi extends CI_Controller
 
         $this->db->set('ket', $ket);
 		$this->db->set('disposisi', $disposisi);
-		$this->db->set('penerima', $kepada);
+		$this->db->set('penerima_disposisi', $kepada);
         $this->db->set('sts', $sts);
         $this->db->where('id', $id);
 		$this->db->update('app_disposisi');
@@ -221,7 +220,7 @@ class Disposisi extends CI_Controller
         for ($i = 0; $i < $count; $i++) {
             $notif[] = array(
                 'id_surat' => $id_surat,
-                'penerima' => $penerima[$i],
+                'penerima_disposisi' => $penerima[$i],
                 'notif' => $notifikasi,
                 'date_created' => $now
             );
@@ -231,7 +230,6 @@ class Disposisi extends CI_Controller
        $this->session->set_flashdata('flash_a', 'Success');
         redirect('disposisi/viewMasukPimpinan');
     }
-
 
     public static function format($date)
     {

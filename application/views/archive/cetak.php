@@ -17,7 +17,7 @@
                             <td colspan="3">
                                 <center>
                                     <img src="<?= base_url('assets/img/qrcode/'); ?><?= $arsip['qrcode']; ?>.png" style="width:90px">
-                                    <p>Copy dengan cara klik kanan pilih copy image kemudian pindahkan ke lembar kerja anda</p>
+                                    <p>UNTUK SEMENTARA QRCODE DIDOWNLOAD</p>
                                     <h3>NOMOR SURAT : <?= $arsip['nomor_surat']; ?></h3>
 
                                 </center>

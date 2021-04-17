@@ -211,14 +211,14 @@ class ArchiveNew extends CI_Controller
 		$this->load->view('layout/header', $data);
 		$this->load->view('layout/sidebar', $data);
 		$this->load->view('layout/navbar', $data);
-		$this->load->view('archive/upload', $data);
+		$this->load->view('archiveNew/upload', $data);
 		$this->load->view('archiveNew/modalUpload', $data);
 		$this->load->view('layout/footer');
 	}
 
 	public function upload2()
 	{
-		$data['data'] = $this->Archive_Models->view_archive();
+		$data['data'] = $this->ArchiveNew_Models->view_archive();
 		$data['arsip'] = $this->db->get('app_archive_new')->result_array();
 		$id = $this->input->post('id');
 		$upload_image = $_FILES['scan']['name'];
@@ -243,7 +243,7 @@ class ArchiveNew extends CI_Controller
 			}
 		}
 
-		$this->Archive_Models->upload_archive($id, $new_image);
+		$this->ArchiveNew_Models->upload_archive($id, $new_image);
 		$this->session->set_flashdata('flash_a', 'Success');
 		redirect('archiveNew/uploadBerkas');
 	}
@@ -254,8 +254,34 @@ class ArchiveNew extends CI_Controller
 		$hal = $this->input->post('hal');
 		$jenis_archive = $this->input->post('jenis_archive');
 		$tujuan = $this->input->post('tujuan');
-		$this->Archive_Models->edit_archive($id, $kode_surat, $hal, $jenis_archive, $tujuan);
+		$this->ArchiveNew_Models->edit_archive($id, $kode_surat, $hal, $jenis_archive, $tujuan);
 		$this->session->set_flashdata('flash_a', 'Success');
-		redirect('archive/uploadBerkas');
+		redirect('archiveNew/uploadBerkas');
+	}
+
+	public function keyword()
+	{
+		$data['title'] = 'Telusuri Surat';
+		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
+
+		$this->load->view('layout/header', $data);
+		$this->load->view('layout/sidebar', $data);
+		$this->load->view('layout/navbar', $data);
+		$this->load->view('archiveNew/keyword');
+		$this->load->view('layout/footer');
+	}
+
+	public function keywordView()
+    {
+		$data['title'] = 'Telusuri Surat';
+		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
+		$keyword = $this->input->post('keyword');
+		$data['data'] = $this->ArchiveNew_Models->view_archive_keyword($keyword);
+		$this->load->view('layout/header', $data);
+		$this->load->view('layout/sidebar', $data);
+		$this->load->view('layout/navbar', $data);
+		$this->load->view('archiveNew/keywordView', $data);
+		$this->load->view('archiveNew/modalUpload', $data);
+		$this->load->view('layout/footer');
 	}
 }

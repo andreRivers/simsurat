@@ -34,7 +34,7 @@ class Master extends CI_Controller
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
         $this->load->view('layout/navbar', $data);
-        $this->load->view('master/arsipNew', $data); 
+        $this->load->view('master/arsipNew', $data);
         $this->load->view('layout/footer');
 	}
 	

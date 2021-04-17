@@ -16,10 +16,10 @@
 		<div class="card-body">
 			<div class="form-group">
 				<h4 for="usr">
-					<center> NOMOR SURAT</center>
+				<center> Telusuri Surat Dengan (No Surat/Hal Surat)</center>
 				</h4>
-				<form method="POST" action="<?= base_url('archiveNew/uploadBerkas'); ?>">
-					<input type="text" class="form-control" id="id" name="id" required>
+				<form method="POST" action="<?= base_url('archiveNew/keywordView'); ?>">
+					<input type="text" class="form-control" id="keyword" name="keyword" required>
 			</div>
 			<center>
 				<button type="submit" class="btn btn-success btn-icon-split">
@@ -37,7 +37,10 @@
 <!-- /.container-fluid -->
 <!-- Begin Page Content -->
 <div class="container-fluid">
-	
+	<div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash_a'); ?>"></div>
+	<?php if ($this->session->flashdata('flash_a')) : ?>
+
+	<?php endif; ?>
 
 
 	<div class="card shadow mb-4">
@@ -95,7 +98,7 @@
 										</button>
 										<div class="dropdown-menu">
 											<a href="#" data-toggle="modal" data-target="#editArchive<?php echo $id; ?>" class="dropdown-item">EDIT</a>
- 										<a href="<?= base_url('archiveNew/'); ?>cetak/<?php echo $id; ?>" target="_blank" class="dropdown-item" >QR CODE</a>
+ 										<a href="<?= base_url('archive/'); ?>cetak/<?php echo $id; ?>" target="_blank" class="dropdown-item" >QR CODE</a>
 											<a href="#" data-toggle="modal" data-target="#upload<?php echo $id; ?>" class="dropdown-item">UPLOAD</a>
 										</div>
 									</div>

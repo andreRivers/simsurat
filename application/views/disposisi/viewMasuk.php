@@ -16,7 +16,7 @@
         <div class="card-body">
 
             <div class="table-responsive">
-			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -60,23 +60,8 @@
                                             Penerima : <?php echo $penerima; ?> | Tanggal Kirim : <?php echo Disposisi::format($date_created); ?>
                                             <br>
                                             Pengirim : <?php echo $email; ?></i>
-											<?php
-                               				 if ($user['role_id'] == 2) { ?>
-                                       		<br>
-                                        	Catatan Pengirim : <?php echo $catatan; ?>
-										   <?php } ?>
-
-										   <?php
-                               				 if ($user['role_id'] == 3) { ?>
-                                       		<br>
-                                        	Catatan Pengirim : <?php echo $catatan; ?>
-										   <?php } ?>
-
-										   <?php
-                               				 if ($user['role_id'] == 1) { ?>
-                                       		<br>
-                                        	Catatan Pengirim : <?php echo $catatan; ?>
-										   <?php } ?>
+                                        <br>
+                                        Catatan Pengirim : <?php echo $catatan; ?>
                                     </small>
                                     <br>
 
@@ -144,4 +129,4 @@
         </div>
     </div>
 </div>
-
+</div>

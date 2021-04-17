@@ -131,9 +131,8 @@ foreach ($data->result_array() as $i) :
                                 </thead>
                             </table>
 
-							<div class="form-group">
-							<label for="text">KEPADA:</label>
-                           
+				<div class="form-group">
+				<label for="text">KEPADA:</label>
                                 <select multiple class="selectpicker form-control" id="number-multiple" name="penerima[]" data-container="body" data-live-search="true" title="Pilih Penerima" data-hide-disabled="true" data-actions-box="true" data-virtual-scroll="false" required>
                                     <?php foreach ($us as $u) : ?>
                                         <option value="<?= $u['email']; ?>"><?= $u['nama']; ?></option>
@@ -141,6 +140,7 @@ foreach ($data->result_array() as $i) :
                                 </select>
                            
                         </div>
+
 
 
                             <div class="form-group">
