@@ -67,8 +67,9 @@
 							$no_surat = $i['no_surat'];
 							$kode_surat = $i['kode_surat'];
 							$hal = $i['hal'];
-							$jenis_archive = $i['jenis_archive'];
+							$jenis_archive = $i['jenis_archive']; 
 							$tujuan = $i['tujuan'];
+							$kirim = $i['kirim'];
 							$unit_created = $i['unit_created'];
 							$date_created = $i['date_created'];
 							$scan = $i['scan'];
@@ -100,6 +101,9 @@
 											<a href="#" data-toggle="modal" data-target="#editArchive<?php echo $id; ?>" class="dropdown-item">EDIT</a>
  										<a href="<?= base_url('archive/'); ?>cetak/<?php echo $id; ?>" target="_blank" class="dropdown-item" >QR CODE</a>
 											<a href="#" data-toggle="modal" data-target="#upload<?php echo $id; ?>" class="dropdown-item">UPLOAD</a>
+											<?php if ($kirim == 1) { ?>
+                                                <a href="#" data-toggle="modal" data-target="#kirimArchiveNew<?php echo $id; ?>" class="dropdown-item">KIRIM</a>
+                                            <?php } ?>
 										</div>
 									</div>
 

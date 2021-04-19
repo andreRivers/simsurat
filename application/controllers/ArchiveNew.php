@@ -282,6 +282,7 @@ class ArchiveNew extends CI_Controller
 		$this->load->view('layout/navbar', $data);
 		$this->load->view('archiveNew/keywordView', $data);
 		$this->load->view('archiveNew/modalUpload', $data);
+		$this->load->view('archiveNew/modal_archiveNew', $data);
 		$this->load->view('layout/footer');
 	}
 }
