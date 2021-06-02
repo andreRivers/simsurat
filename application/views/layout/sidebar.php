@@ -11,7 +11,7 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 ?>
 
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 	<!-- Sidebar - Brand -->
 	<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('admin'); ?>">
@@ -38,21 +38,21 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 	<?php if ($user['role_id'] == '2') { ?>
 		<!-- Nav Item - Pages Collapse Menu -->
 		<div class="sidebar-heading">
-			Archive
+			Arsip
 		</div>
 		<li class="nav-item">
 			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 				<i class="fas fa-fw fa-cog"></i>
-				<span>Archive</span>
+				<span>Arsip</span>
 			</a>
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">archive:</h6>
+					<h6 class="collapse-header">Arsip:</h6>
 
-					<a class=" collapse-item" href="<?= base_url('archive/view'); ?>">View (100)</a>
-					<a class="collapse-item" href="<?= base_url('archive/report'); ?>">View all</a>
-					<a class="collapse-item" href="<?= base_url('archive/uploadBerkas'); ?>">Upload</a>
-					<a class="collapse-item" href="<?= base_url('archive/keyword'); ?>">Keyword</a>
+					<a class=" collapse-item" href="<?= base_url('archive/view'); ?>">Lihat Data (100)</a>
+					<a class="collapse-item" href="<?= base_url('archive/report'); ?>">Semua Data</a>
+					<a class="collapse-item" href="<?= base_url('archive/uploadBerkas'); ?>">Unggah Berkas</a>
+					<a class="collapse-item" href="<?= base_url('archive/keyword'); ?>">Pencarian</a>
 				</div>
 			</div>
 		</li>
@@ -60,20 +60,20 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 
 	<?php if ($user['role_id'] == '1') { ?>
 		<div class="sidebar-heading">
-			Archive
+			Arsip
 		</div>
 		<!-- Nav Item - Pages Collapse Menu -->
 		<li class="nav-item">
 			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 				<i class="fas fa-fw fa-cog"></i>
-				<span>Archive</span>
+				<span>Arsip</span>
 			</a>
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">archive:</h6>
+					<h6 class="collapse-header">Arsip:</h6>
 
-					<a class=" collapse-item" href="<?= base_url('archive/view'); ?>">View (30)</a>
-					<a class=" collapse-item" href="<?= base_url('archive/viewUser'); ?>">View All</a>
+					<a class=" collapse-item" href="<?= base_url('archive/view'); ?>">Lihat Data (30)</a>
+					<a class=" collapse-item" href="<?= base_url('archive/viewUser'); ?>">Semua Data</a>
 					
 				</div>
 			</div>
@@ -82,7 +82,7 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 		<li class="nav-item">
 			<a class="nav-link" href="<?= base_url('validasiNew'); ?>">
 				<i class="fas fa-fw fa-mobile"></i>
-				<span>Scan Archive</span></a>
+				<span>Scan Arsip</span></a>
 		</li>
 
 		<li class="nav-item">
@@ -104,27 +104,52 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 		</li>
 	<?php } ?>
 
-	<?php if ($user['role_id'] == '2') { ?>
+	<?php if ($user['email'] == 'erwinasmadi@umsu.ac.id') { ?>
 		<li class="nav-item">
 			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
 				<i class="fas fa-fw fa-file"></i>
-				<span>Archive Old</span>
+				<span>Arsip Lama</span>
 			</a>
 			<div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">archive:</h6>
-
-					<a class=" collapse-item" href="<?= base_url('old/view'); ?>">View (30)</a>
-					<a class="collapse-item" href="<?= base_url('old/report'); ?>">View all</a>
+					<h6 class="collapse-header">Arsip:</h6>
+					<a class=" collapse-item" href="<?= base_url('old/view'); ?>">Lihat Data</a>
+					<a class="collapse-item" href="<?= base_url('old/semuaData'); ?>">Semua Data</a>
+					<a class=" collapse-item" href="<?= base_url('old/pencarian'); ?>">Pencarian</a>
 
 				</div>
 			</div>
 		</li>
+		
+	<?php } ?>
+
+	
+	<?php if ($user['email'] == 'akrim@umsu.ac.id') { ?>
+		<li class="nav-item">
+			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+				<i class="fas fa-fw fa-file"></i>
+				<span>Arsip Lama</span>
+			</a>
+			<div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+				<div class="bg-white py-2 collapse-inner rounded">
+					<h6 class="collapse-header">Arsip:</h6>
+					<a class=" collapse-item" href="<?= base_url('old/view'); ?>">Lihat Data</a>
+					<a class="collapse-item" href="<?= base_url('old/semuaData'); ?>">Semua Data</a>
+					<a class=" collapse-item" href="<?= base_url('old/pencarian'); ?>">Pencarian</a>
+
+				</div>
+			</div>
+		</li>
+		
+	<?php } ?>
+
+	<?php if ($user['role_id'] == '2') { ?>
+
 		<!-- Nav Item - Charts -->
 		<li class="nav-item">
 			<a class="nav-link" href="<?= base_url('validasi'); ?>">
 				<i class="fas fa-fw fa-mobile"></i>
-				<span>Scan Archive</span></a>
+				<span>Scan Arsip</span></a>
 		</li>
 		<li class="nav-item">
 			<a class="nav-link" href="<?= base_url('disposisi/viewMasuk'); ?>">
@@ -143,6 +168,7 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 				<i class="fas fa-fw fa-share-square"></i>
 				<span>Disposisi</span></a>
 		</li>
+
 	<?php } ?>
 
 
@@ -150,22 +176,22 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 	<?php if ($user['role_id'] == '3') { ?>
 		<!-- Nav Item - Pages Collapse Menu -->
 		<div class="sidebar-heading">
-			Archive
+			Arsip
 		</div>
 		<li class="nav-item">
 			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 				<i class="fas fa-fw fa-cog"></i>
-				<span>Archive</span>
+				<span>Arsip</span>
 			</a>
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
-					<h6 class="collapse-header">archive:</h6>
+					<h6 class="collapse-header">Arsip:</h6>
 
-					<a class=" collapse-item" href="<?= base_url('archiveNew/view'); ?>">View (30)</a>
+					<a class=" collapse-item" href="<?= base_url('archiveNew/view'); ?>">Lihat Data (30)</a>
 					<?php if ($user['role_id'] == '3') { ?>
-						<a class="collapse-item" href="<?= base_url('archiveNew/report'); ?>">View all</a>
-						<a class="collapse-item" href="<?= base_url('archiveNew/uploadBerkas'); ?>">Upload</a>
-						<a class="collapse-item" href="<?= base_url('archiveNew/keyword'); ?>">Keyword</a>
+						<a class="collapse-item" href="<?= base_url('archiveNew/report'); ?>">Data Semua</a>
+						<a class="collapse-item" href="<?= base_url('archiveNew/uploadBerkas'); ?>">Unggah Berkas</a>
+						<a class="collapse-item" href="<?= base_url('archiveNew/keyword'); ?>">Pencarian</a>
 					
 					<?php } ?>
 				</div>
@@ -176,7 +202,7 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 		<li class="nav-item">
 			<a class="nav-link" href="<?= base_url('validasiNew'); ?>">
 				<i class="fas fa-fw fa-mobile"></i>
-				<span>Scan Archive</span></a>
+				<span>Scan Arsip</span></a>
 		</li>
 
 		<li class="nav-item">
@@ -201,6 +227,25 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 	<?php } ?>
 
 	<?php if ($user['role_id'] == '2') { ?>
+		<li class="nav-item">
+			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+				<i class="fas fa-fw fa-inbox"></i>
+				<span>Surat Dari Luar</span>
+			</a>
+			<div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+				<div class="bg-white py-2 collapse-inner rounded">
+					<h6 class="collapse-header">Arsip:</h6>
+					<a class=" collapse-item" href="<?= base_url('arsipLuar/view'); ?>">Lihat Data</a>
+					<a class="collapse-item" href="<?= base_url('arsipLuar/semuaData'); ?>">Semua Data</a>
+					<a class=" collapse-item" href="<?= base_url('arsipLuar/pencarian'); ?>">Pencarian</a>
+
+				</div>
+			</div>
+		</li>
+		
+	<?php } ?>
+
+	<?php if ($user['role_id'] == '2') { ?>
 		<hr class="sidebar-divider">
 		<!-- Heading -->
 		<div class="sidebar-heading">
@@ -215,9 +260,9 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 			<div id="collapseTwo2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Sppd:</h6>
-					<a class=" collapse-item" href="<?= base_url('sppd/newSppd'); ?>">New SPPD</a>
-					<a class=" collapse-item" href="<?= base_url('sppd/view30'); ?>">List (30)</a>
-					<a class="collapse-item" href="<?= base_url('sppd/viewall'); ?>">List all</a>
+					<a class=" collapse-item" href="<?= base_url('sppd/newSppd'); ?>">Buat SPPD</a>
+					<a class=" collapse-item" href="<?= base_url('sppd/view30'); ?>">Lihat Data (30)</a>
+					<a class="collapse-item" href="<?= base_url('sppd/viewall'); ?>">Data Semua</a>
 				</div>
 			</div>
 		</li>
@@ -230,9 +275,9 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 			<div id="collapseTwo3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Surat Tugas:</h6>
-					<a class=" collapse-item" href="<?= base_url('suratTugas/newSuratTugas'); ?>">New Surat Tugas</a>
-					<a class=" collapse-item" href="<?= base_url('suratTugas/view30'); ?>">List (30)</a>
-					<a class="collapse-item" href="<?= base_url('suratTugas/report'); ?>">List all</a>
+					<a class=" collapse-item" href="<?= base_url('suratTugas/newSuratTugas'); ?>">Buat Surat Tugas</a>
+					<a class=" collapse-item" href="<?= base_url('suratTugas/view30'); ?>">Lihat Data (30)</a>
+					<a class="collapse-item" href="<?= base_url('suratTugas/report'); ?>">Data Semua</a>
 				</div>
 			</div>
 		</li>
@@ -271,7 +316,7 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 		<li class="nav-item">
 			<a class="nav-link" href="<?= base_url('sppd/list'); ?>">
 				<i class="fas fa-fw fa-file"></i>
-				<span>List Sppd</span></a>
+				<span>Lihat Data Sppd</span></a>
 		</li>
 
 		<li class="nav-item">
@@ -355,26 +400,26 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 	<!-- Divider -->
 	<hr class="sidebar-divider d-none d-md-block">
 	<div class="sidebar-heading">
-		My Data
+		Data Saya
 	</div>
 	<!-- Nav Item - Charts -->
 	<li class="nav-item">
 		<a class="nav-link" href="<?= base_url('admin/profil'); ?>">
 			<i class="fas fa-fw fa-user"></i>
-			<span>My profile</span></a>
+			<span>Profil</span></a>
 	</li>
 
 	<li class="nav-item">
 		<a class="nav-link" href="<?= base_url('admin/edit_profil'); ?>">
 			<i class="fas fa-fw fa-edit"></i>
-			<span>Edit profile</span></a>
+			<span>Ubah Profil</span></a>
 	</li>
 
 	<!-- Nav Item - Tables -->
 	<li class="nav-item">
 		<a class="nav-link" href="<?= base_url('admin/changepassword'); ?>">
 			<i class="fas fa-fw fa-table"></i>
-			<span>Change password</span></a>
+			<span>Ubah Password</span></a>
 	</li>
 
 	<!-- Divider -->

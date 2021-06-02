@@ -11,19 +11,14 @@ class Old extends CI_Controller
 	}
 	public function view()
 	{
-		$data['title'] = 'Old Archive';
+		$data['title'] = 'Arsip Lama';
 		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
 		// $data['archive'] = $this->db->get('app_archive')->result_array();
 		$data['data'] = $this->Old_Models->view_Old();
-		$data['jenis_archive'] = $this->db->get('app_jenis_archive')->result_array();
-		$this->form_validation->set_rules('no_surat', 'no_surat', 'trim|required|is_unique[app_old.no_surat]', [
-			'is_unique' => 'Maaf No Surat Sudah Ada!'
-		]);
-		$this->form_validation->set_rules('kode_surat', 'Kode Surat', 'required');
-		$this->form_validation->set_rules('hal', 'hal', 'required');
-		$this->form_validation->set_rules('jenis_archive', 'Tingkat Kepentingan', 'required');
-		$this->form_validation->set_rules('tujuan', 'Tujuan', 'required');
 
+		$this->form_validation->set_rules('hal_surat', 'Hal Surat', 'required');
+		$this->form_validation->set_rules('tahun', 'tahun', 'required');
+	
 		if ($this->form_validation->run() ==  false) {
 			$this->load->view('layout/header', $data);
 			$this->load->view('layout/sidebar', $data);
@@ -32,45 +27,150 @@ class Old extends CI_Controller
 			$this->load->view('old/modal_archive', $data);
 			$this->load->view('layout/footer');
 		} else {
-			$no_surat = $this->input->post('no_surat');
-			$kode_surat = $this->input->post('kode_surat');
 			$email = $this->input->post('email');
-			$scan = "default.jpg";
-			$hal = $this->input->post('hal');
-			$jenis_archive = $this->input->post('jenis_archive');
-			$tujuan = $this->input->post('tujuan');
-			$unit_created = $this->input->post('unit_created');
-			$now = date("Y-m-d");
+			$hal_surat = $this->input->post('hal_surat');
+			$tahun = $this->input->post('tahun');
+			$now = date("Y-m-d H:i:s");
 			$date_created = $now;
-			$hasil = $no_surat . $kode_surat;
-			$upload_image = $_FILES['scan']['name'];
+
+			$upload_image = $_FILES['file']['name'];
 
 			if ($upload_image) {
 				$config['allowed_types'] = 'pdf|jpg|png|jpeg';
-				$config['max_size']      = '4096';
-				$config['upload_path'] = 'upload/old/';
+				$config['max_size']      = '20480';
+				$config['upload_path'] = 'arsip/';
 				$config['encrypt_name'] = TRUE;
-
+	
 				$this->load->library('upload', $config);
-
-				if ($this->upload->do_upload('scan')) {
-					$old_image = $data['app_old']['scan'];
+	
+				if ($this->upload->do_upload('file')) {
+					$old_image = $data['app_arsip_lama']['file'];
 					if ($old_image != 'default.jpg') {
-						unlink(FCPATH . 'upload/old' . $old_image);
+						unlink(FCPATH . 'arsip/' . $old_image);
 					}
 					$new_image = $this->upload->data('file_name');
-					$this->db->set('scan', $new_image);
+					$this->db->set('file', $new_image);
 				} else {
 					echo $this->upload->display_errors();
 				}
 			}
 
-
-
-			$this->Old_Models->save_old($no_surat, $hasil, $hal, $jenis_archive, $tujuan, $unit_created, $date_created,  $email, $scan);
+			$data = [
+                'email' => $email,
+                'hal_surat' => $this->input->post('hal_surat'),
+                'tahun' => $this->input->post('tahun'),
+				'date_created' => $date_created,
+				'file' => $new_image
+				
+			];
+			$this->db->insert('app_arsip_lama', $data);
 			$this->session->set_flashdata('flash_a', 'Success');
 			redirect('old/view');
 		}
+	}
+	
+	public function viewBaris()
+	{
+		$data['title'] = 'Arsip Lama';
+		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
+		// $data['archive'] = $this->db->get('app_archive')->result_array();
+		$tahun = $this->input->post('tahun');
+		$baris = $this->input->post('baris');
+		$data['data'] = $this->Old_Models->view_baris($tahun,$baris);
+
+		
+		$this->form_validation->set_rules('hal_surat', 'Hal Surat', 'required');
+		$this->form_validation->set_rules('tahun', 'tahun', 'required');
+	
+		if ($this->form_validation->run() ==  false) {
+
+			$this->load->view('layout/header', $data);
+			$this->load->view('layout/sidebar', $data);
+			$this->load->view('layout/navbar', $data);
+			$this->load->view('old/viewBaris', $data);
+			$this->load->view('old/modal_archive', $data);
+			$this->load->view('layout/footer');
+		} else {
+			$email = $this->input->post('email');
+			$hal_surat = $this->input->post('hal_surat');
+			$tahun = $this->input->post('tahun');
+			$now = date("Y-m-d H:i:s");
+			$date_created = $now;
+
+			$upload_image = $_FILES['file']['name'];
+
+			if ($upload_image) {
+				$config['allowed_types'] = 'pdf|jpg|png|jpeg';
+				$config['max_size']      = '20480';
+				$config['upload_path'] = 'arsip/';
+				$config['encrypt_name'] = TRUE;
+	
+				$this->load->library('upload', $config);
+	
+				if ($this->upload->do_upload('file')) {
+					$old_image = $data['app_arsip_lama']['file'];
+					if ($old_image != 'default.jpg') {
+						unlink(FCPATH . 'arsip/' . $old_image);
+					}
+					$new_image = $this->upload->data('file_name');
+					$this->db->set('file', $new_image);
+				} else {
+					echo $this->upload->display_errors();
+				}
+			}
+
+			$data = [
+                'email' => $email,
+                'hal_surat' => $this->input->post('hal_surat'),
+                'tahun' => $this->input->post('tahun'),
+				'date_created' => $date_created,
+				'file' => $new_image
+				
+			];
+			$this->db->insert('app_arsip_lama', $data);
+			$this->session->set_flashdata('flash_a', 'Success');
+			redirect('old/view');
+		}
+	}
+
+	public function semuaData()
+	{
+		$data['title'] = 'Semua Arsip 2015-2019';
+		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
+		// $data['archive'] = $this->db->get('app_archive')->result_array();
+		$data['data'] = $this->Old_Models->view_Old_all();
+
+			$this->load->view('layout/header', $data);
+			$this->load->view('layout/sidebar', $data);
+			$this->load->view('layout/navbar', $data);
+			$this->load->view('old/semuaData', $data);
+			$this->load->view('layout/footer');
+	
+	}
+
+	public function pencarian()
+	{
+		$data['title'] = 'Telusuri Surat 2015-2019';
+		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
+
+		$this->load->view('layout/header', $data);
+		$this->load->view('layout/sidebar', $data);
+		$this->load->view('layout/navbar', $data);
+		$this->load->view('old/pencarian');
+		$this->load->view('layout/footer');
+	}
+
+	public function lihatPencarian()
+    {
+		$data['title'] = 'Telusuri Surat 2015-2019';
+		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
+		$keyword = $this->input->post('keyword');
+		$data['data'] = $this->Old_Models->view_pencarian($keyword);
+		$this->load->view('layout/header', $data);
+		$this->load->view('layout/sidebar', $data);
+		$this->load->view('layout/navbar', $data);
+		$this->load->view('old/lihatPencarian', $data);
+		$this->load->view('layout/footer');
 	}
 
 
@@ -81,17 +181,43 @@ class Old extends CI_Controller
 		redirect('old/view');
 	}
 
-	public function edit()
+	public function ubahArsip()
 	{
+		$data['title'] = 'Arsip Lama';
+		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['data'] = $this->Old_Models->view_Old();
+
 		$id = $this->input->post('id');
-		$no_surat = $this->input->post('no_surat');
-		$kode_surat = $this->input->post('kode_surat');
-		$hal = $this->input->post('hal');
-		$jenis_archive = $this->input->post('jenis_archive');
-		$tujuan = $this->input->post('tujuan');
-		$this->Old_Models->edit_old($id, $no_surat, $kode_surat, $hal, $jenis_archive, $tujuan);
-		$this->session->set_flashdata('flash_a', 'Success');
-		redirect('old/view');
+			$hal_surat = $this->input->post('hal_surat');
+			$tahun = $this->input->post('tahun');
+			$upload_image = $_FILES['file']['name'];
+
+			if ($upload_image) {
+				$config['allowed_types'] = 'pdf|jpg|png|jpeg';
+				$config['max_size']      = '20480';
+				$config['upload_path'] = 'arsip/';
+				$config['encrypt_name'] = TRUE;
+	
+				$this->load->library('upload', $config);
+	
+				if ($this->upload->do_upload('file')) {
+					$old_image = $data['app_arsip_lama']['file'];
+					if ($old_image != 'default.jpg') {
+						unlink(FCPATH . 'arsip/' . $old_image);
+					}
+					$new_image = $this->upload->data('file_name');
+					$this->db->set('file', $new_image);
+				} else {
+					echo $this->upload->display_errors();
+				}
+			}
+
+			$this->db->set('hal_surat', $hal_surat);
+			$this->db->set('tahun', $tahun);
+			$this->db->where('id', $id);
+			$this->db->update('app_arsip_lama');
+			$this->session->set_flashdata('flash_a', 'Success');
+			redirect('old/view');
 	}
 
 	public function upload()

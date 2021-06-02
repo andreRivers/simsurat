@@ -16,13 +16,13 @@
 		<div class="card-body">
 			<div class="form-group">
 				<h4 for="usr">
-					<center> Telusuri Surat Administrtasi UMSU</center>
+					<center> Pencarian Surat Administrasi UMSU</center>
 				</h4>
 				<form method="POST" action="<?= base_url('archive/keywordView'); ?>">
 					<input type="text" class="form-control" id="keyword" name="keyword" required>
 			</div>
 			<center>
-				<button type="submit" class="btn btn-success btn-icon-split">
+				<button type="submit" class="btn btn-primary btn-icon-split">
 					<span class="icon text-white-50">
 						<i class="fas fa-search"></i>
 					</span>
