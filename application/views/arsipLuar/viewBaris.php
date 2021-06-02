@@ -46,12 +46,14 @@
 		</div>
 		<div class="card-body">
 		
-		<form class="form-inline" method="post" action="<?= base_url('old/viewBaris'); ?>">
+		<form class="form-inline" method="post" action="<?= base_url('arsipLuar/viewBaris'); ?>">
 
 		<label for="email" class="mr-sm-2">Tahun:</label>
 		<select name="tahun" id="tahun" class="form-control mb-2 mr-sm-4" required>
     		<option selected disabled value="">Pilih tahun</option>
-    		<option value="2019">2019</option>
+			<option value="2021">2021</option>
+			<option value="2020">2020</option>
+			<option value="2019">2019</option>
     		<option value="2018">2018</option>
     		<option value="2017">2017</option>
 			<option value="2016">2016</option>
@@ -90,7 +92,7 @@
 					<thead>
 						<tr>
 							<th>NO</th>
-							<th>Nama File</th>
+							<th>Keterangan</th>
 							<th>Berkas</th>
 							<th>Aksi</th>
 						</tr>
@@ -100,13 +102,30 @@
 						$no = 1;
 						foreach ($data->result_array() as $i) :
 							$id = $i['id'];
+							$instansi = $i['instansi'];
+							$no_surat = $i['no_surat'];
+							$tgl_surat = $i['tgl_surat'];
+							$tgl_masuk = $i['tgl_masuk'];
+							$isi_ringkas = $i['isi_ringkas'];
+							$berkas = $i['berkas'];
 							$hal_surat = $i['hal_surat'];
-							$file = $i['file'];
+							$tahun = $i['tahun'];
 						?>
 							<tr>
 								<td><?php echo $id; ?></td>
-								<td><?php echo $hal_surat; ?></td>
-								<td> <a href="<?= base_url('arsip/');?><?php echo $file; ?>" target="_blank" class="dropdown-item">LIHAT</a></td>
+								<td>Surat Dari: <?php echo $instansi; ?> 
+								<br>
+								No. Surat:  <?php echo $no_surat; ?>
+								<br>
+								Tanggal Surat:  <?php echo $tgl_surat; ?>
+								<br>
+								Hal Surat:  <?php echo $hal_surat; ?>
+								<br>
+								<small>Ringkasan Surat :  <?php echo $isi_ringkas; ?></small>
+								<br>
+								<small>Tanggal Surat Diterima:  <?php echo $tgl_masuk; ?></small>
+								</td>
+								<td> <a href="<?= base_url('arsipLain/');?><?php echo $berkas; ?>" target="_blank" class="dropdown-item">LIHAT</a></td>
 
 
 								<td>
@@ -119,7 +138,7 @@
 										</button>
 										<div class="dropdown-menu">
 											<a href="#" data-toggle="modal" data-target="#editArchive<?php echo $id; ?>" class="dropdown-item">EDIT</a>
-											<a href="<?= base_url(); ?>old/delete/<?php echo $id; ?>" class="dropdown-item btn-sm tombol-hapus">HAPUS</a>
+											<a href="<?= base_url(); ?>arsipLuar/delete/<?php echo $id; ?>" class="dropdown-item btn-sm tombol-hapus">HAPUS</a>
 										
 										</div>
 									</div>

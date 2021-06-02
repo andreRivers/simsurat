@@ -19,24 +19,41 @@
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<th>NO</th>
-							<th>Nama File</th>
+						<th>NO</th>
+							<th>Keterangan</th>
 							<th>Berkas</th>
 							<th>Aksi</th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php
+					<?php
 						$no = 1;
 						foreach ($data->result_array() as $i) :
 							$id = $i['id'];
+							$instansi = $i['instansi'];
+							$no_surat = $i['no_surat'];
+							$tgl_surat = $i['tgl_surat'];
+							$tgl_masuk = $i['tgl_masuk'];
+							$isi_ringkas = $i['isi_ringkas'];
+							$berkas = $i['berkas'];
 							$hal_surat = $i['hal_surat'];
-							$file = $i['file'];
+							$tahun = $i['tahun'];
 						?>
-							<tr>
+								<tr>
 								<td><?php echo $id; ?></td>
-								<td><?php echo $hal_surat; ?></td>
-								<td> <a href="<?= base_url('arsip/');?><?php echo $file; ?>" target="_blank" class="dropdown-item">LIHAT</a></td>
+								<td>Surat Dari: <?php echo $instansi; ?> 
+								<br>
+								No. Surat:  <?php echo $no_surat; ?>
+								<br>
+								Tanggal Surat:  <?php echo $tgl_surat; ?>
+								<br>
+								Hal Surat:  <?php echo $hal_surat; ?>
+								<br>
+								<small>Ringkasan Surat :  <?php echo $isi_ringkas; ?></small>
+								<br>
+								<small>Tanggal Surat Diterima:  <?php echo $tgl_masuk; ?></small>
+								</td>
+								<td> <a href="<?= base_url('arsipLain/');?><?php echo $berkas; ?>" target="_blank" class="dropdown-item">LIHAT</a></td>
 
 
 								<td>
@@ -49,24 +66,12 @@
 										</button>
 										<div class="dropdown-menu">
 											<a href="#" data-toggle="modal" data-target="#editArchive<?php echo $id; ?>" class="dropdown-item">EDIT</a>
-											<a href="<?= base_url(); ?>old/delete/<?php echo $id; ?>" class="dropdown-item btn-sm tombol-hapus">HAPUS</a>
+											<a href="<?= base_url(); ?>arsipLuar/delete/<?php echo $id; ?>" class="dropdown-item btn-sm tombol-hapus">HAPUS</a>
 										
 										</div>
 									</div>
 
-									<!-- <a data-toggle="modal" data-target="#editArchive<?php echo $id; ?>" class="btn btn-warning btn-circle btn-sm" title="Edit Archive">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a href="<?= base_url(); ?>archive/delete/<?php echo $id; ?>" class="btn btn-danger btn-circle btn-sm tombol-hapus" title="Delete Archive">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                    <a href="<?= base_url('archive/'); ?>cetak/<?php echo $id; ?>" class="btn btn-success btn-circle btn-sm" target="_blank" title="Cetak Barcode QR">
-                                        <i class="fas fa-print"></i>
-                                    </a>
-                                    <a data-toggle="modal" data-target="#upload<?php echo $id; ?>" class="btn btn-primary btn-circle btn-sm" title="Upload Archive">
-                                        <i class="fas fa-upload" style="color:white"></i>
-                                    </a> -->
-
+									
 								</td>
 							</tr>
 							<?php $no++; ?>

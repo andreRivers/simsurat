@@ -40,11 +40,13 @@
 		</div>
 		<div class="card-body">
 		
-		<form class="form-inline" method="post" action="<?= base_url('old/viewBaris'); ?>">
+		<form class="form-inline" method="post" action="<?= base_url('arsipLuar/viewBaris'); ?>">
 
 		<label for="email" class="mr-sm-2">Tahun:</label>
 		<select name="tahun" id="tahun" class="form-control mb-2 mr-sm-4" required>
     		<option selected disabled value="">Pilih tahun</option>
+			<option value="2021">2021</option>
+			<option value="2020">2020</option>
     		<option value="2019">2019</option>
     		<option value="2018">2018</option>
     		<option value="2017">2017</option>

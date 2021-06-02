@@ -16,9 +16,9 @@
 		<div class="card-body">
 			<div class="form-group">
 				<h4 for="usr">
-					<center> Pencarian Surat Administrasi UMSU Tahun 2015-2019</center>
+					<center> Pencarian Telusuri Surat Masuk Dari Instansi Lain</center>
 				</h4>
-				<form method="POST" action="<?= base_url('old/lihatPencarian'); ?>">
+				<form method="POST" action="<?= base_url('arsipLuar/lihatPencarian'); ?>">
 					<input type="text" class="form-control" id="keyword" name="keyword" required>
 			</div>
 			<center>

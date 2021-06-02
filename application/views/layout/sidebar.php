@@ -120,22 +120,54 @@ if ($user['email'] == 'akrim@umsu.ac.id') {
 				</div>
 			</div>
 		</li>
+
+		<li class="nav-item">
+			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+				<i class="fas fa-fw fa-inbox"></i>
+				<span>Surat Dari Luar</span>
+			</a>
+			<div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+				<div class="bg-white py-2 collapse-inner rounded">
+					<h6 class="collapse-header">Arsip:</h6>
+					<a class=" collapse-item" href="<?= base_url('arsipLuar/view'); ?>">Lihat Data</a>
+					<a class="collapse-item" href="<?= base_url('arsipLuar/semuaData'); ?>">Semua Data</a>
+					<a class=" collapse-item" href="<?= base_url('arsipLuar/pencarian'); ?>">Pencarian</a>
+
+				</div>
+			</div>
+		</li>
 		
 	<?php } ?>
 
 	
 	<?php if ($user['email'] == 'akrim@umsu.ac.id') { ?>
 		<li class="nav-item">
-			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseTwo">
+			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapseTwo">
 				<i class="fas fa-fw fa-file"></i>
 				<span>Arsip Lama</span>
 			</a>
-			<div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+			<div id="collapse4" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Arsip:</h6>
 					<a class=" collapse-item" href="<?= base_url('old/view'); ?>">Lihat Data</a>
 					<a class="collapse-item" href="<?= base_url('old/semuaData'); ?>">Semua Data</a>
 					<a class=" collapse-item" href="<?= base_url('old/pencarian'); ?>">Pencarian</a>
+
+				</div>
+			</div>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapseTwo">
+				<i class="fas fa-fw fa-inbox"></i>
+				<span>Surat Dari Luar</span>
+			</a>
+			<div id="collapse3" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+				<div class="bg-white py-2 collapse-inner rounded">
+					<h6 class="collapse-header">Arsip:</h6>
+					<a class=" collapse-item" href="<?= base_url('arsipLuar/view'); ?>">Lihat Data</a>
+					<a class="collapse-item" href="<?= base_url('arsipLuar/semuaData'); ?>">Semua Data</a>
+					<a class=" collapse-item" href="<?= base_url('arsipLuar/pencarian'); ?>">Pencarian</a>
 
 				</div>
 			</div>

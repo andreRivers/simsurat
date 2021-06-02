@@ -7,203 +7,171 @@ class ArsipLuar extends CI_Controller
 	{
 		parent::__construct();
 		is_logged_in();
-		$this->load->model('Old_Models');
+		$this->load->model('ArsipLuar_Models');
 	}
 	public function view()
 	{
-		$data['title'] = 'Arsip Lama';
+		$data['title'] = 'Arsip Surat Masuk Dari Instansi Lain';
 		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
 		// $data['archive'] = $this->db->get('app_archive')->result_array();
-		$data['data'] = $this->Old_Models->view_Old();
-
+		$data['data'] = $this->ArsipLuar_Models->view();
+		$this->form_validation->set_rules('instansi', 'instansi', 'required');
+		$this->form_validation->set_rules('no_surat', 'Nomor Surat', 'required');
+		$this->form_validation->set_rules('tgl_surat', 'Tanggal Surat', 'required');
 		$this->form_validation->set_rules('hal_surat', 'Hal Surat', 'required');
+		$this->form_validation->set_rules('isi_ringkas', 'Isi Ringkas', 'required');
 		$this->form_validation->set_rules('tahun', 'tahun', 'required');
+		$this->form_validation->set_rules('tgl_masuk', 'Tanggal Diterima', 'required');
+		$this->form_validation->set_rules('email', 'email', 'required');
 	
 		if ($this->form_validation->run() ==  false) {
 			$this->load->view('layout/header', $data);
 			$this->load->view('layout/sidebar', $data);
 			$this->load->view('layout/navbar', $data);
-			$this->load->view('old/view', $data);
-			$this->load->view('old/modal_archive', $data);
+			$this->load->view('arsipLuar/view', $data);
+			$this->load->view('arsipLuar/modal_archive', $data);
 			$this->load->view('layout/footer');
 		} else {
 			$email = $this->input->post('email');
-			$hal_surat = $this->input->post('hal_surat');
-			$tahun = $this->input->post('tahun');
 			$now = date("Y-m-d H:i:s");
 			$date_created = $now;
 
-			$upload_image = $_FILES['file']['name'];
-
+			$upload_image = $_FILES['berkas']['name'];
 			if ($upload_image) {
 				$config['allowed_types'] = 'pdf|jpg|png|jpeg';
 				$config['max_size']      = '20480';
-				$config['upload_path'] = 'arsip/';
+				$config['upload_path'] = 'arsipLain/';
 				$config['encrypt_name'] = TRUE;
 	
 				$this->load->library('upload', $config);
-	
-				if ($this->upload->do_upload('file')) {
-					$old_image = $data['app_arsip_lama']['file'];
+				if ($this->upload->do_upload('berkas')) {
+					$old_image = $data['app_arsip_lain']['berkas'];
 					if ($old_image != 'default.jpg') {
-						unlink(FCPATH . 'arsip/' . $old_image);
+						unlink(FCPATH . 'arsipLain/' . $old_image);
 					}
 					$new_image = $this->upload->data('file_name');
-					$this->db->set('file', $new_image);
+					$this->db->set('berkas', $new_image);
 				} else {
 					echo $this->upload->display_errors();
 				}
 			}
 
 			$data = [
-                'email' => $email,
-                'hal_surat' => $this->input->post('hal_surat'),
+				'email' => $email,
+				'instansi' => $this->input->post('instansi'),
+				'no_surat' => $this->input->post('no_surat'),
+				'tgl_surat' => $this->input->post('tgl_surat'),
+				'hal_surat' => $this->input->post('hal_surat'),
+				'isi_ringkas' => $this->input->post('isi_ringkas'),
+                'tgl_masuk' => $this->input->post('tgl_masuk'),
                 'tahun' => $this->input->post('tahun'),
-				'date_created' => $date_created,
-				'file' => $new_image
+				'berkas' => $new_image,
+				'date_created' => $date_created
 				
 			];
-			$this->db->insert('app_arsip_lama', $data);
+			$this->db->insert('app_arsip_lain', $data);
 			$this->session->set_flashdata('flash_a', 'Success');
-			redirect('old/view');
+			redirect('arsipLuar/view');
 		}
 	}
 	
 	public function viewBaris()
 	{
-		$data['title'] = 'Arsip Lama';
+		$data['title'] = 'Arsip Surat Masuk Dari Instansi Lain';
 		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
 		// $data['archive'] = $this->db->get('app_archive')->result_array();
 		$tahun = $this->input->post('tahun');
 		$baris = $this->input->post('baris');
-		$data['data'] = $this->Old_Models->view_baris($tahun,$baris);
+		$data['data'] = $this->ArsipLuar_Models->view_baris($tahun,$baris);
 
-		
-		$this->form_validation->set_rules('hal_surat', 'Hal Surat', 'required');
-		$this->form_validation->set_rules('tahun', 'tahun', 'required');
 	
-		if ($this->form_validation->run() ==  false) {
 
 			$this->load->view('layout/header', $data);
 			$this->load->view('layout/sidebar', $data);
 			$this->load->view('layout/navbar', $data);
-			$this->load->view('old/viewBaris', $data);
-			$this->load->view('old/modal_archive', $data);
+			$this->load->view('arsipLuar/viewBaris', $data);
+			$this->load->view('arsipLuar/modal_archive', $data);
 			$this->load->view('layout/footer');
-		} else {
-			$email = $this->input->post('email');
-			$hal_surat = $this->input->post('hal_surat');
-			$tahun = $this->input->post('tahun');
-			$now = date("Y-m-d H:i:s");
-			$date_created = $now;
-
-			$upload_image = $_FILES['file']['name'];
-
-			if ($upload_image) {
-				$config['allowed_types'] = 'pdf|jpg|png|jpeg';
-				$config['max_size']      = '20480';
-				$config['upload_path'] = 'arsip/';
-				$config['encrypt_name'] = TRUE;
-	
-				$this->load->library('upload', $config);
-	
-				if ($this->upload->do_upload('file')) {
-					$old_image = $data['app_arsip_lama']['file'];
-					if ($old_image != 'default.jpg') {
-						unlink(FCPATH . 'arsip/' . $old_image);
-					}
-					$new_image = $this->upload->data('file_name');
-					$this->db->set('file', $new_image);
-				} else {
-					echo $this->upload->display_errors();
-				}
-			}
-
-			$data = [
-                'email' => $email,
-                'hal_surat' => $this->input->post('hal_surat'),
-                'tahun' => $this->input->post('tahun'),
-				'date_created' => $date_created,
-				'file' => $new_image
-				
-			];
-			$this->db->insert('app_arsip_lama', $data);
-			$this->session->set_flashdata('flash_a', 'Success');
-			redirect('old/view');
-		}
 	}
 
 	public function semuaData()
 	{
-		$data['title'] = 'Semua Arsip 2015-2019';
+		$data['title'] = 'Semua Surat Masuk Dari Instansi Lain';
 		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
 		// $data['archive'] = $this->db->get('app_archive')->result_array();
-		$data['data'] = $this->Old_Models->view_Old_all();
+		$data['data'] = $this->ArsipLuar_Models->view_Old_all();
 
 			$this->load->view('layout/header', $data);
 			$this->load->view('layout/sidebar', $data);
 			$this->load->view('layout/navbar', $data);
-			$this->load->view('old/semuaData', $data);
+			$this->load->view('arsipLuar/semuaData', $data);
 			$this->load->view('layout/footer');
 	
 	}
 
 	public function pencarian()
 	{
-		$data['title'] = 'Telusuri Surat 2015-2019';
+		$data['title'] = 'Telusuri Surat Masuk Dari Instansi Lain';
 		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('layout/sidebar', $data);
 		$this->load->view('layout/navbar', $data);
-		$this->load->view('old/pencarian');
+		$this->load->view('arsipLuar/pencarian');
 		$this->load->view('layout/footer');
 	}
 
 	public function lihatPencarian()
     {
-		$data['title'] = 'Telusuri Surat 2015-2019';
+		$data['title'] = 'Telusuri Surat Masuk Dari Instansi Lain';
 		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
 		$keyword = $this->input->post('keyword');
-		$data['data'] = $this->Old_Models->view_pencarian($keyword);
+		$data['data'] = $this->ArsipLuar_Models->view_pencarian($keyword);
 		$this->load->view('layout/header', $data);
 		$this->load->view('layout/sidebar', $data);
 		$this->load->view('layout/navbar', $data);
-		$this->load->view('old/lihatPencarian', $data);
+		$this->load->view('arsipLuar/lihatPencarian', $data);
 		$this->load->view('layout/footer');
 	}
 
 
 	public function delete($id)
 	{
-		$this->Old_Models->delete_old($id);
+		$this->ArsipLuar_Models->delete_old($id);
 		$this->session->set_flashdata('flash_a', 'Delete');
-		redirect('old/view');
+		redirect('arsipLuar/view');
 	}
 
 	public function ubahArsip()
 	{
 		$data['title'] = 'Arsip Lama';
 		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
-		$data['data'] = $this->Old_Models->view_Old();
+		$data['data'] = $this->ArsipLuar_Models->view();
 
-		$id = $this->input->post('id');
+		   $id = $this->input->post('id');
 			$hal_surat = $this->input->post('hal_surat');
 			$tahun = $this->input->post('tahun');
-			$upload_image = $_FILES['file']['name'];
+			$instansi = $this->input->post('instansi');
+			$no_surat = $this->input->post('no_surat');
+			$tgl_surat = $this->input->post('tgl_surat');
+			$hal_surat = $this->input->post('hal_surat');
+			$isi_ringkas = $this->input->post('isi_ringkas');
+            $tgl_masuk = $this->input->post('tgl_masuk');
+            $tahun = $this->input->post('tahun');
+			$upload_image = $_FILES['berkas']['name'];
 
 			if ($upload_image) {
 				$config['allowed_types'] = 'pdf|jpg|png|jpeg';
 				$config['max_size']      = '20480';
-				$config['upload_path'] = 'arsip/';
+				$config['upload_path'] = 'arsipLain/';
 				$config['encrypt_name'] = TRUE;
 	
 				$this->load->library('upload', $config);
 	
-				if ($this->upload->do_upload('file')) {
-					$old_image = $data['app_arsip_lama']['file'];
+				if ($this->upload->do_upload('berkas')) {
+					$old_image = $data['app_arsip_lain']['berkas'];
 					if ($old_image != 'default.jpg') {
-						unlink(FCPATH . 'arsip/' . $old_image);
+						unlink(FCPATH . 'arsipLain/' . $old_image);
 					}
 					$new_image = $this->upload->data('file_name');
 					$this->db->set('file', $new_image);
@@ -212,17 +180,22 @@ class ArsipLuar extends CI_Controller
 				}
 			}
 
+			$this->db->set('instansi', $instansi);
 			$this->db->set('hal_surat', $hal_surat);
+			$this->db->set('no_surat', $no_surat);
+			$this->db->set('tgl_surat', $tgl_surat);
+			$this->db->set('isi_ringkas', $isi_ringkas);
+			$this->db->set('tgl_masuk', $tgl_masuk);
 			$this->db->set('tahun', $tahun);
 			$this->db->where('id', $id);
-			$this->db->update('app_arsip_lama');
+			$this->db->update('app_arsip_lain');
 			$this->session->set_flashdata('flash_a', 'Success');
-			redirect('old/view');
+			redirect('arsipLuar/view');
 	}
 
 	public function upload()
 	{
-		$data['data'] = $this->Old_Models->view_old();
+		$data['data'] = $this->ArsipLuar_Models->view_old();
 		$data['arsip'] = $this->db->get('app_old')->result_array();
 		$id = $this->input->post('id');
 		$upload_image = $_FILES['scan']['name'];
@@ -247,7 +220,7 @@ class ArsipLuar extends CI_Controller
 			}
 		}
 
-		$this->Old_Models->upload_old($id, $new_image);
+		$this->ArsipLuar_Models->upload_old($id, $new_image);
 		$this->session->set_flashdata('flash_a', 'Success');
 		redirect('old/view');
 	}
@@ -278,7 +251,7 @@ class ArsipLuar extends CI_Controller
 		$data['title'] = 'Old Archive';
 		$data['user'] = $this->db->get_where('app_user', ['email' => $this->session->userdata('email')])->row_array();
 		// $data['archive'] = $this->db->get('app_archive')->result_array();
-		$data['data'] = $this->Old_Models->view_old();
+		$data['data'] = $this->ArsipLuar_Models->view_old();
 		$data['jenis_archive'] = $this->db->get('app_jenis_archive')->result_array();
 		$this->form_validation->set_rules('id', 'id', 'trim|required|is_unique[app_archive.id]', [
 			'is_unique' => 'Maaf No Surat Sudah Ada!'
@@ -292,8 +265,8 @@ class ArsipLuar extends CI_Controller
 			$this->load->view('layout/header', $data);
 			$this->load->view('layout/sidebar', $data);
 			$this->load->view('layout/navbar', $data);
-			$this->load->view('old/report', $data);
-			$this->load->view('old/modal_archive', $data);
+			$this->load->view('arsipLuar/report', $data);
+			$this->load->view('arsipLuar/modal_archive', $data);
 			$this->load->view('layout/footer');
 		} else {
 			$id = $this->input->post('id');
@@ -333,8 +306,8 @@ class ArsipLuar extends CI_Controller
 		$this->load->view('layout/header', $data);
 		$this->load->view('layout/sidebar', $data);
 		$this->load->view('layout/navbar', $data);
-		$this->load->view('archive/upload', $data);
-		$this->load->view('archive/modalUpload', $data);
+		$this->load->view('arsipLuar/upload', $data);
+		$this->load->view('arsipLuar/modalUpload', $data);
 		$this->load->view('layout/footer');
 	}
 
